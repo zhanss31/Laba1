@@ -8,7 +8,7 @@ private:
 	int count;
 public:
 
-	ListSequence(LinkedList<T>* items, int count)
+	ListSequence(T* items, int count)
 	{
 		this->items = new LinkedList<T>(items, count);
 	}
