@@ -9,7 +9,7 @@ int main()
 	srand(time(NULL));
 	setlocale(LC_ALL, "rus");
 	int choice=0;
-	long size_array;
+	int size_array;
 	int typeseq;
 	ISorter<int>* sorts[5];
 	std::string sortNames[5];
@@ -36,12 +36,10 @@ int main()
 	cin >> size_array;
 	while (choice != 6)
 	{
-		int*Array = new int[size_array];
+		int *Array=new int [size_array];
+
 		for (int i = 0; i < size_array; i++) {
-			Array[i] = rand()%100;
-		}
-		for (int i = 0; i < size_array; i++) {
-			cout<<Array[i]<<" ";
+			Array[i] = rand() % 100;
 		}
 		cout << endl;
 		cout << "Выберети реализацию:" << endl;
@@ -49,14 +47,21 @@ int main()
 		cout << "ArraySequence-2" << endl;
 		cin >> typeseq;
 		Sequence <int>* seq;
-	
 		if (typeseq == 1)
 		{
-			seq = new ArraySequence<int>(Array, size_array);
+			ArraySequence<int>* b;
+			for (int i = 0; i < size_array; i++) {
+				b->Prepend(Array[i]);
+			}
+			seq = b->Copy();
 		}
 		if (typeseq== 2)
 		{
-			seq = new ListSequence<int>(Array, size_array);
+			ListSequence<int>* b;
+			for (int i = 0; i < size_array; i++) {
+				b->Prepend(Array[i]);
+			}
+			seq = b->Copy();
 		}
 		cout << "Выберите сортировку:" << endl;
 		cout << "Bubble Sort-1" << endl;
@@ -72,7 +77,5 @@ int main()
 		sorts[choice - 1]->Sort(*seq);
 		unsigned int end_time = clock();
 		cout<<sortNames[choice-1]<<": "<< end_time - start_time << endl;
-		
-
 	}
 }
