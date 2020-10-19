@@ -8,178 +8,71 @@ int main()
 {
 	srand(time(NULL));
 	setlocale(LC_ALL, "rus");
-	long i;
-	int b;
+	int choice=0;
+	long size_array;
+	int typeseq;
+	ISorter<int>* sorts[5];
+	std::string sortNames[5];
+
+	sortNames[0] = "Bubble sort";
+	sortNames[1] = "Insert sort";
+	sortNames[2] = "Quick sort";
+	sortNames[3] = "Heap sort";
+	sortNames[4] = "Shell sort";
+
+	BubbleSorter<int> bs{};
+	InsertSorter<int> ins{};
+	quckSorter<int> qs{};
+	PyramidSorter<int> hs{};
+	ShellSorter<int> shs{};
+	sorts[0] = &bs;
+	sorts[1] = &ins;
+	sorts[2] = &qs;
+	sorts[3] = &hs;
+	sorts[4] = &shs;
 
 	cout << "Сравнение эффективности сортировок:" << endl;
-	cout << "Выберети реализацию:ListSequence-1, ArraySequence -2" << endl;
-	int g;
-	cin >> g;
-	cout << endl;
-	switch (g)
+	cout << "Введите количество элементов рандомного массива"<<endl;
+	cin >> size_array;
+	while (choice != 6)
 	{
-	case 1:
-	{
-		ListSequence<int> p;
-		for (i = 0; i < 10000; i++)
-		{
-			b = rand() % 100;
-			p.Prepend(b);
+		int*Array = new int[size_array];
+		for (int i = 0; i < size_array; i++) {
+			Array[i] = rand()%100;
 		}
-		int r=0;
-		do {
-			cout << "Выберите сортировку: 0-bubble sort,  1-quick sort,   2-pyramid sort,  3 -shell sort, 4- insert sort , 5- выйти из программы" << endl;
-			cin >> r;
-			cout << endl;
-			switch (r)
-			{
-			case 0:
-			{
-				cout << "Bubble Sort:";
-				Sequence <int>* seq1;
-				seq1 = p.Copy();
-				BubbleSorter<int> bubble{};
-				unsigned int start_time = clock();
-				bubble.Sort(*seq1);
-				unsigned int end_time = clock();
-				cout << end_time - start_time << endl;
-				break;
-			}
-			case 1:
-			{
-				cout << "quick Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				quckSorter<int> quck{};
-				unsigned int start_time1 = clock();
-				quck.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			case 2:
-			{
-				cout << "Pyramid Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				PyramidSorter<int> pyram{};
-				unsigned int start_time1 = clock();
-				pyram.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			case 3:
-			{
-				cout << "Shell Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				ShellSorter<int> shell{};
-				unsigned int start_time1 = clock();
-				shell.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			case 4:
-			{
-				cout << "Insert Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				InsertSorter<int> insert{};
-				unsigned int start_time1 = clock();
-				insert.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			}
-
-		} while (r!=5);
-		cout << endl;
-		break;
-	}
-	case 2:
-	{
-		ArraySequence<int> p;
-		for (i = 0; i < 10000; i++)
-		{
-			b = rand() % 100;
-			p.Prepend(b);
+		for (int i = 0; i < size_array; i++) {
+			cout<<Array[i]<<" ";
 		}
-		int r = 0;
-		do {
-			cout << "Выберите сортировку: 0-bubble sort,  1-quick sort,   2-pyramid sort,  3 -shell sort, 4- insert sort , 5- выйти из программы" << endl;
-			cin >> r;
-			cout << endl;
-			switch (r)
-			{
-			case 0:
-			{
-				cout << "Bubble Sort:";
-				Sequence <int>* seq1;
-				seq1 = p.Copy();
-				BubbleSorter<int> bubble{};
-				unsigned int start_time = clock();
-				bubble.Sort(*seq1);
-				unsigned int end_time = clock();
-				cout << end_time - start_time << endl;
-				break;
-			}
-			case 1:
-			{
-				cout << "quick Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				quckSorter<int> quck{};
-				unsigned int start_time1 = clock();
-				quck.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			case 2:
-			{
-				cout << "Pyramid Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				PyramidSorter<int> pyram{};
-				unsigned int start_time1 = clock();
-				pyram.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			case 3:
-			{
-				cout << "Shell Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				ShellSorter<int> shell{};
-				unsigned int start_time1 = clock();
-				shell.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			case 4:
-			{
-				cout << "Insert Sort:";
-				Sequence <int>* seq2;
-				seq2 = p.Copy();
-				InsertSorter<int> insert{};
-				unsigned int start_time1 = clock();
-				insert.Sort(*seq2);
-				unsigned int end_time1 = clock();
-				cout << end_time1 - start_time1 << endl;
-				break;
-			}
-			}
-
-		} while (r != 5);
 		cout << endl;
-		break;
-	}
-	}
+		cout << "Выберети реализацию:" << endl;
+		cout << "ListSequence-1"<<endl;
+		cout << "ArraySequence-2" << endl;
+		cin >> typeseq;
+		Sequence <int>* seq;
 	
+		if (typeseq == 1)
+		{
+			seq = new ArraySequence<int>(Array, size_array);
+		}
+		if (typeseq== 2)
+		{
+			seq = new ListSequence<int>(Array, size_array);
+		}
+		cout << "Выберите сортировку:" << endl;
+		cout << "Bubble Sort-1" << endl;
+		cout << "Insert Sort-2" << endl;
+		cout << "quick Sort-3" << endl;
+		cout << "Pyramid Sort-4" << endl;
+		cout << "Shell Sort-5 " << endl;
+		cout << "end- 6" << endl;
+		cin >> choice;
+		if (choice == 6)
+			break;
+		unsigned int start_time = clock();
+		sorts[choice - 1]->Sort(*seq);
+		unsigned int end_time = clock();
+		cout<<sortNames[choice-1]<<": "<< end_time - start_time << endl;
+		
+
+	}
 }
